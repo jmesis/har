@@ -1,0 +1,111 @@
+$(document).ready(function(){
+
+    var validaFormulario = $("#formFactura").validate({
+        rules:{
+            txttelffactura:"required",
+            txtclientefactura:"required",
+            txtdirfactura:"required"
+        },
+        messages:{
+            txttelffactura:"Este campo es obligatorio",
+            txtclientefactura:"Este campo es obligatorio",
+            txtdirfactura:"Este campo es obligatorio"
+        }
+    });
+
+    $.ajaxSetup({
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $("#btn-actfactura").on("click",function(e){
+        e.preventDefault();
+        if (validaFormulario.form()){
+
+            var blhouse = $("#txtblhousefactura").val();
+            var nofactura = $("#nofact").html();
+            var telefono = $("#txttelffactura").val();
+            var cliente = $("#txtclientefactura").val();
+            var direccion = $("#txtdirfactura").val();
+
+            var action = $("#urlfacturaupdate").attr("href");
+            var method = 'PATCH';
+            var url = action+"/"+nofactura;
+
+            $.ajax({
+                type:method,
+                url:url,
+                data:{
+                    nofactura:nofactura,
+                    telefono: telefono,
+                    cliente: cliente,
+                    direccion: direccion
+                },
+                success:function(data){
+                    if(data.success=="true"){
+                        $("#msgsession").attr("hidden",true);
+                        var message=data.message;
+                        var title="Success!!!";
+                        var error ='';
+                        var reload = false
+                        var window = "informacion";
+                        showMessage(message,error,title,reload,window);
+
+                        $.ajax({
+                            type:"POST",
+                            url:"tofacturas",
+                            data:{
+                                identificador:"carganofactura",
+                                noblhouse: blhouse
+                            },
+                            success:function(response){
+                                $(".table_listaitemfacturaBody tr").remove();
+                                $(".table_listaNofacturaBody tr").remove();
+                                var jsonResults = JSON.parse(response);
+                                if(jsonResults.success == true){
+                                    $.each(jsonResults.data, function( index, response ){
+                                        agregarFilaFacturas(response.nofactura);
+                                    });
+
+                                    $("#formFactura").trigger("reset");
+                                    $("#txtctdadfactura").attr("disabled", true);
+                                    $("#txttelffactura").attr("disabled",true);
+                                    $("#txtclientefactura").attr("disabled",true);
+                                    $("#txtdirfactura").attr("disabled",true);
+                                    $("#txttipopagofactura").attr("disabled",true);
+                                    $("#resetVtotal").attr("disabled",true);
+                                    $("#btn-facturara").attr("disabled",true);
+                                    $("#btnEditFactura").attr("disabled",true);
+                                    $("#btnCancelFactura").attr("disabled",true);
+                                    $("#txtblhousefactura").val(blhouse);
+                                    $("#txtclientefactura").val(cliente);
+                                    $("#nofact").html("");
+                                    $("#festadovalor").html("");
+                                    $("#fcancelado").html("");
+                                    $("#festadovalor").removeClass("bg-danger");
+                                    $("#festadovalor").removeClass("text-white");
+                                    $("#festadovalor").addClass("bg-secondary");
+                                    $("#festadovalor").addClass("text-black-50");
+                                    $("#txtdirfactura").val("");
+                                    $("#txttelffactura").val("");
+                                }
+                            }
+                        });
+                    }
+                    else{
+                        var sms = data.message;
+                        $(".msgsession").attr("hidden",false);
+                        $(".msg").html(sms).fadeOut(8000);
+                    }
+                },
+                error:function(){
+                    var sms = "Error, por favor contactar su Administrador de sistema";
+                    $(".msgsession").attr("hidden",false);
+                    $(".msg").html(sms).fadeOut(8000);
+                }
+            })
+
+        }
+    });
+})

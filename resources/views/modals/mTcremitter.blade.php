@@ -9,7 +9,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-12 col-xl-12 m-auto p-0">
                         <div class="card">
                             <div class="card-header bg-primary text-white d-flex justify-content-between">
-                                <h4 id="title-mremitter">{{ __('Nuevo Remitente')}}</h4>
+                                <h4 id="title-mremdest">{{ __('Nuevo Remitente')}}</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-row">
@@ -21,31 +21,31 @@
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
                                         <label><strong>{{ __("Nombre(s)") }}</strong></label>
-                                        <input type="text" id="txtRemitterName" name="txtRemitterName" class="form-control form-control-sm inputremitter requerido" required>
+                                        <input type="text" id="txtRemitterName" name="txtRemitterName" class="form-control form-control-sm inputremdest requerido" required>
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <label><strong>{{ __("1er Apellido") }}</strong></label>
-                                        <input type="text" id="txtRemitterApellidop" name="txtRemitterApellidop" class="form-control form-control-sm inputremitter requerido" required>
+                                        <input type="text" id="txtRemitterApellidop" name="txtRemitterApellidop" class="form-control form-control-sm inputremdest requerido" required>
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <label><strong>{{ __("2do Apellido") }}</strong></label>
-                                        <input type="text" id="txtRemitterApellidom" name="txtRemitterApellidom" class="form-control form-control-sm inputremitter requerido" required>
+                                        <input type="text" id="txtRemitterApellidom" name="txtRemitterApellidom" class="form-control form-control-sm inputremdest requerido" required>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
                                         <label><strong>{{ __("Telefono") }}</strong></label>
-                                        <input type="text" id="txtRemitterTelef" name="txtRemitterTelef" class="form-control form-control-sm inputremitter requerido" required>
+                                        <input type="text" id="txtRemitterTelef" name="txtRemitterTelef" class="form-control form-control-sm inputremdest requerido" required>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label><strong>{{ __("Direccion") }}</strong></label>
-                                        <textarea type="text" id="txtRemitterDir" name="txtRemitterDir" class="form-control form-control-sm inputremitter requerido" required></textarea>
+                                        <textarea type="text" id="txtRemitterDir" name="txtRemitterDir" class="form-control form-control-sm inputremdest requerido" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
                                         <label><strong>{{ __("Email") }}</strong></label>
-                                        <input type="text" id="txtRemitterEmail" name="txtRemitterEmail" class="form-control form-control-sm inputremitter requerido" required>
+                                        <input type="text" id="txtRemitterEmail" name="txtRemitterEmail" class="form-control form-control-sm inputremdest requerido" required>
                                     </div>
                                 </div>
                             </div>

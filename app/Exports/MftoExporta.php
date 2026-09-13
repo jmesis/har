@@ -11,17 +11,23 @@ use Maatwebsite\Excel\Facades\Excel;
 class MftoExporta implements FromView
 {
     protected $data;
-    protected $ctd;
+    protected $ctdh;
+    protected $ctdhouse;
+    protected $totalpersonas;
 
-    public function __construct($data,$ctd)
+    public function __construct($data,$ctd,$ctdhouse,$totalpersonas)
     {
         $this->data = $data;
-        $this->ctd = $ctd;
+        $this->ctdh = $ctd;
+        $this->ctdhouse = $ctdhouse;
+        $this->totalpersonas = $totalpersonas;
     }
 
     public function view():View{
         $data=$this->data;
-        $ctd=$this->ctd;
-        return view('exports.cmfto_aereo', compact(['data','ctd']));
+        $ctdh=$this->ctdh;
+        $ctdhouse=$this->ctdhouse;
+        $totalpersonas=$this->totalpersonas;
+        return view('exports.mfto_aereon', compact(['data','ctdh','ctdhouse','totalpersonas']));
     }
 }

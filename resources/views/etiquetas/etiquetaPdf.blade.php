@@ -99,7 +99,7 @@
 	<body style="background: white">
             <div class="etiqueta">
                 {{-- <div>
-
+                    
                 </div> --}}
                 <table width="100%">
                     <tr>

@@ -36,7 +36,7 @@
                                 <td class="rowtdbuque" hidden>{{ $buqueviajeitem->idbuque }}</td>
                                 <td class="rowtdbuque">{{ $buqueviajeitem->buque }}</td>
                                 <td class="rowtdbuque">{{ $buqueviajeitem->viaje }}</td>
-                                <td style="text-align: center; width: 100px"><button class="btn btn-sm btnEditarViaje btnEditar"><i class="far fa-edit"></i>Editar</button></td>
+                                <td style="text-align: center; width: 100px"><button class="btn btn-sm btnEditarViaje btnEditar"><i class="far fa-edit mr-1"></i>Editar</button></td>
                             </tr>
                         @endforeach
 

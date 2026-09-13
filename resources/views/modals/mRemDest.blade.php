@@ -3,6 +3,9 @@
 <div class="modal mt-5 fade" id="mRemDest">
     <div id="mRemDestDialog" class="modal-dialog modal-lg-dialog mRemDest">
         <div class="modal-content">
+            {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/styles.css') }}" rel="stylesheet"> --}}
+
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 m-0 p-0">
                 <form id="formRemDest" class="formRemDest" method="POST" action="{{ route('tcremdest.store') }}">
                     @csrf
@@ -93,6 +96,10 @@
                                         <select id="txtcp" name="txtcp" class="selectpicker show-menu-arrow form-control form-control-sm inputremdest requerido" data-live-search="true" required>
 
                                         </select>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="lblemail"><strong>{{ __("Email") }}</strong></label>
+                                        <input type="text" id="txtemail_remdest" name="txtemail_remdest" class="form-control form-control-sm inputremdest">
                                     </div>
                                 </div>
                             </div>

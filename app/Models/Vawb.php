@@ -47,6 +47,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $fecha
  * @property string $codigoenvio
  * @property string $aerolinea
+ * @property string $rutas
  *
  * @package App\Models
  */
@@ -103,6 +104,7 @@ class Vawb extends Model
 		'estado',
 		'fecha',
 		'codigoenvio',
-		'aerolinea'
+		'aerolinea',
+		'rutas'
 	];
 }

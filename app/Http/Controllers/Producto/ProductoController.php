@@ -9,9 +9,9 @@ use App\Models\Cargo;
 use App\Models\Etiqueta;
 use App\Models\Ordene;
 use App\Models\Producto;
-use App\Models\TcCapituloproducto;
-use App\Models\TcProductoArt;
-use App\Models\TcProductoCap;
+// use App\Models\TcCapituloproducto;
+// use App\Models\TcProductoArt;
+// use App\Models\TcProductoCap;
 use App\Models\Vitemproducto;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -206,6 +206,7 @@ class ProductoController extends Controller
                 }
             }
             else if($catg[0]['categoria'] == 'BULTOS'){
+                
                 $producto = Producto::create([
                     'idorden'  =>   $idorden['idorden'],
                     'idarticulo'     =>   $catg[0]['idarticulo'],
@@ -248,11 +249,10 @@ class ProductoController extends Controller
                 ]);
             }
 
-
             $codorden = substr($request->noorden,0,3);
             $year = substr(Carbon::now('Y'),2,2);
             $idproducto = Producto::where('idorden',$idorden['idorden'])->get('idproducto')->last();
-
+            
             if($codorden == 'ENA' || $codorden == 'MNJ'){
 
                 $ordenEtiqueta = Etiqueta::where('idorden',$idorden['idorden'])->get('idorden')->last();
@@ -811,85 +811,37 @@ class ProductoController extends Controller
      */
     public function destroy(Request $request, $idproducto)
     {
-        // dd($request->producto);
         $idorden = Ordene::where('no_orden',$request->noorden)->get('idorden');
         $codorden = substr($request->noorden,0,3);
         $prod = Producto::where('idproducto',$request->producto)->get('target');
-        $cargo = Cargo::where('idorden',$idorden[0]['idorden'])->where('facturado','Y')->where('um',$prod[0]['target'])->get('idcargo');
 
         DB::beginTransaction();
         try{
             if($codorden == 'ENA' || $codorden == 'MNJ'){
-
-                if($cargo->isEmpty()){
-                    // cuando no tiene factura
-                    $cargodelete = Cargo::where('idorden',$idorden[0]['idorden'])->where('um',$prod[0]['target'])->get('idcargo');
-                    if($cargodelete->isEmpty()){
-                        //cuando no tiene cargos ni factura
-                        Etiqueta::where('idproducto',$request->producto)->delete();
-                        $countEtiqueta = Etiqueta::where('idorden',$idorden[0]['idorden'])->count();
-                        Etiqueta::where('idorden', $idorden[0]['idorden'])->update([
-                            'cantidad'  => $countEtiqueta
-                        ]);
-                        DB::select("CALL obtenerSeqBulto(".$idorden[0]['idorden'].")");
-                        Producto::where('idproducto',$request->producto)->delete();
-                    }
-                    else{
-                        //cuando tiene cargos y no factura
-                        Cargo::where('idcargo',$cargodelete[0]['idcargo'])->delete();
-                        Etiqueta::where('idproducto',$request->producto)->delete();
-
-                        $countEtiqueta = Etiqueta::where('idorden',$idorden[0]['idorden'])->count();
-                        Etiqueta::where('idorden', $idorden[0]['idorden'])->update([
-                            'cantidad'  => $countEtiqueta
-                        ]);
-                        DB::select("CALL obtenerSeqBulto(".$idorden[0]['idorden'].")");
-                        Producto::where('idproducto',$request->producto)->delete();
-                    }
-                    DB::commit();
-                    return response()->json([
-                        'success' => 'true',
-                        'message'=>'El producto ha sido eliminado'
-                    ]);
-                }
-                else{
-                    //cuando tiene factura
-                    return response()->json([
-                        'success' => 'false',
-                        'message'=>'No se puede eliminar, hay facturas asociadas a este producto'
-                    ]);
-                }
-
+                Etiqueta::where('idproducto',$request->producto)->delete();
+                $countEtiqueta = Etiqueta::where('idorden',$idorden[0]['idorden'])->count();
+                Etiqueta::where('idorden', $idorden[0]['idorden'])->update([
+                    'cantidad'  => $countEtiqueta
+                ]);
+                DB::select("CALL obtenerSeqBulto(".$idorden[0]['idorden'].")");
+                Producto::where('idproducto',$request->producto)->delete();
+            
+                DB::commit();
+                return response()->json([
+                    'success' => 'true',
+                    'message'=>'El producto ha sido eliminado'
+                ]);
             }
             else{
-                if($cargo->isEmpty()){
-                    $cargodelete = Cargo::where('idorden',$idorden[0]['idorden'])->where('um',$prod[0]['target'])->get('idcargo');
-
-                    if($cargodelete->isEmpty()){
-                        // $cargodelete = Cargo::where('idorden',$idorden[0]['idorden'])->where('um',$prod[0]['target'])->get('idcargo');
-                        // Cargo::where('idcargo',$cargodelete[0]['idcargo'])->delete();
-                        Etiqueta::where('idproducto',$request->producto)->delete();
-                        Producto::where('idproducto',$request->producto)->delete();
-                    }
-                    else{
-                        $cargodelete = Cargo::where('idorden',$idorden[0]['idorden'])->where('um',$prod[0]['target'])->get('idcargo');
-                        Cargo::where('idcargo',$cargodelete[0]['idcargo'])->delete();
-                        Etiqueta::where('idproducto',$request->producto)->delete();
-                        Producto::where('idproducto',$request->producto)->delete();
-                    }
-                    DB::commit();
-                    return response()->json([
-                        'success' => 'true',
-                        'message'=>'El producto han sido eliminado'
-                    ]);
-                }
-                else{
-                    return response()->json([
-                        'success' => 'false',
-                        'message'=>'No se puede eliminar, hay facturas asociadas a este producto'
-                    ]);
-                }
-
+                
+                Etiqueta::where('idproducto',$request->producto)->delete();
+                Producto::where('idproducto',$request->producto)->delete();
+                
+                DB::commit();
+                return response()->json([
+                    'success' => 'true',
+                    'message'=>'El producto han sido eliminado'
+                ]);
             }
         }
         catch(Exception $e){
@@ -905,7 +857,6 @@ class ProductoController extends Controller
     public function getNoProducto(Request $request)
     {
         global $seq;
-        // if($request->ajax()){
 
             $noproducto = Producto::orderBy('noproducto','Asc')->get('noproducto')->last();
 
@@ -916,7 +867,7 @@ class ProductoController extends Controller
                 $seq=1;
             }
             return response()->json($seq);
-        // }
+        
     }
 
     public function getArticulosCap(Request $request){
@@ -924,19 +875,23 @@ class ProductoController extends Controller
         $idorden=Ordene::where('no_orden',$request->orden)->get('idorden');
         $descripcion = Producto::where('idorden',$idorden[0]['idorden'])->where('idarticulo',$request->idproducto)->get('idproducto');
 
-        // if($descripcion->isEmpty()){
             $jsondata=array();
             $jsondata['data'] = Vitemproducto::where('idarticulo',$request->idproducto)->get();
 
             $jsondata['success'] = true;
             $jsondata['message'] = 'Request made';
             echo json_encode($jsondata);
-        // }
-        // else{
-        //     $jsondata['success'] = false;
-        //     // $jsondata['message'] = 'Request made';
-        //     // echo json_encode($jsondata);
-        //     return response()->json($jsondata);
-        // }
+    }
+
+    public function getProductos(){
+
+        $fechaActual=Carbon::now()->format('Y-m-d');
+
+        $jsondata=array();
+        $jsondata['data'] = Vitemproducto::whereNull('f_ffin')->orWhere('f_ffin','>',$fechaActual)->orderBy('producto','ASC')->get();
+
+        $jsondata['success'] = true;
+        $jsondata['message'] = 'Request made';
+        echo json_encode($jsondata);
     }
 }

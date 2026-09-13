@@ -68,7 +68,7 @@ $(document).ready(function(){
                         if(data.success=="true"){
                             $("#msgsession").attr("hidden",true);
                             var message=data.message;
-                            var title="Success!!!";
+                            var title="Informacion";
                             var error ='';
                             var reload = true;
                             var window="informacion";

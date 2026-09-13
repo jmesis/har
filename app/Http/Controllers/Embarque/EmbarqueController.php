@@ -57,18 +57,18 @@ class EmbarqueController extends Controller
             'tipoemb'=>'required'
         ]);
 
-
+        
         $idorigen = TcOrigen::where('origen',$fields['origen'])->get(['idorigen','codigo'])->last();
         $idtipoemb = TcTipoemb::where('tipoembarque',$fields['tipoemb'])->get(['idtipoemb','codigo'])->last();
         $idconsignado = TcCliente::where('nombre',$fields['consignado'])->get('idcliente')->last();
         $idembarcador = TcCliente::where('nombre',$fields['embarcador'])->get('idcliente')->last();
-
+        
         if($idorigen != '' && $idtipoemb != '' && $idconsignado != '' && $idembarcador !=''){
 
             $year = substr(Carbon::now('Y'),2,2);
             $yeardb=substr(Carbon::now('Y'),0,4);
             $noseq = Embarque::where('origen',$idorigen['codigo'])->where('tipoembarque',$idtipoemb['codigo'])->where('anno',$yeardb)->get('noseq')->last();
-
+            
             if($noseq == ''){
                 $resultado = 1;
             }
@@ -228,14 +228,14 @@ class EmbarqueController extends Controller
                     'contenedor'=> strtoupper("".$request['cont'].""),
                     'estado' => $estado,
                 ]);
-
-
+                
+                
                     DB::commit();
                     return response()->json([
                         'success' => 'true',
                         'message'=>'Los datos han sido actualizado correctamente'
                     ]);
-
+         
 
             }
             catch(Exception $e){

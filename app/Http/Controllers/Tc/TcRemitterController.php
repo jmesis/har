@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TcRemitter;
 use App\Models\Vremdest;
 use App\Models\VRemitter;
+use App\Models\Vreceiver;
 use App\Models\VremittersReceiver;
 use Illuminate\Support\Facades\DB;
 USE Exception;
@@ -133,12 +134,21 @@ class TcRemitterController extends Controller
         }
     }
 
-    public function getListRemitter(){
+    public function getListRemitter(Request $request){
+            
+        if($request->ajax()){
             $jsondata=array();
-            $jsondata['data'] = VremittersReceiver::get()->all();
+            if($request['tipoenvio']=='ENA' || $request['tipoenvio']=='MNJ'){
+                $jsondata['data'] = Vreceiver::get()->all();
+            }
+            else{
+                $jsondata['data'] = VremittersReceiver::get()->all();
+            }
+            
 
             $jsondata['success'] = true;
             $jsondata['message'] = 'Request made';
             echo json_encode($jsondata);
+        }
     }
 }

@@ -119,7 +119,7 @@ class BlController extends Controller
             $contenedor=$learr[0]['contenedor'];
             array_push($les,$learr);
         // }
-
+        
         $pdf = PDF::loadView('documentacion.le_4',compact(['les','nombre','house','ci','telefono','direccion','contenedor']))->setPaper('letter');
         $path = public_path('/le');
         $fileName =  'Listaempaque.pdf' ;

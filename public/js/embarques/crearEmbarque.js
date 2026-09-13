@@ -26,10 +26,10 @@ $(document).ready(function(){
         e.preventDefault();
         if (validaFormulario.form()){
 
-            var origen = $("#txtorigen option:selected").text();
-            var embarcador = $("#txtembarcador option:selected").text();
-            var consignado = $("#txtconsignado option:selected").text();
-            var tipoemb = $("#txttipoemb option:selected").text();
+            var origen = $.trim($("#txtorigen option:selected").text());
+            var embarcador = $("#txtembarcador").val();
+            var consignado = $.trim($("#txtconsignado option:selected").text());
+            var tipoemb = $.trim($("#txttipoemb option:selected").text());
             var noembarque = $("#txtdocembarque").val();
 
             var action = $("#formEmbarque").attr("href");

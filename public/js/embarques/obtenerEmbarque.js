@@ -40,9 +40,8 @@ $(document).ready(function(){
         $(".title-membarque").html("Actualizar Embarque");
         $(".txtorigen option:selected").text(origen);
         $(".txtorigen option:selected").val(codigoorigen);
-        $(".txtembarcador option:selected").text(embarcador);
         $(".txtconsignado option:selected").text(consignado);
-        $(".txtembarcador option:selected").val(embarcador);
+        $(".txtembarcador").val(embarcador);
         $(".txtconsignado option:selected").val(consignado);
         $(".txttipoemb option:selected").text(tipoembarque);
         $(".txttipoemb option:selected").val(codigoembarque);
@@ -92,9 +91,6 @@ $(document).ready(function(){
             $(".txtpod").attr("disabled",false);
             $(".txtcont").attr("disabled",false);
             $(".txttipocont").attr("disabled",false);
-
         }
-
-
     });
 });

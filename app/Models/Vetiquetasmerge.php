@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $codigoenvio
  * @property string|null $codigoqr
  * @property string|null $mawb
+ * @property string|null $rutas
  *
  * @package App\Models
  */
@@ -87,6 +88,7 @@ class Vetiquetasmerge extends Model
 		'fecha',
 		'codigoenvio',
 		'codigoqr',
-		'mawb'
+		'mawb',
+		'rutas'
 	];
 }

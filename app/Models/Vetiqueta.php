@@ -37,6 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $fecha
  * @property string $codigoenvio
  * @property string|null $qr
+ * @property string|null $rutas
  *
  * @package App\Models
  */
@@ -85,6 +86,7 @@ class Vetiqueta extends Model
 		'estado',
 		'fecha',
 		'codigoenvio',
-		'qr'
+		'qr',
+		'rutas'
 	];
 }

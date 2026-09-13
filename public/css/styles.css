@@ -26,16 +26,6 @@ main{
     color:white;
 }
 
-.checkbox_orden_disabled{
-    /* background-color: rebeccapurple; */
-     opacity: 0.5;
-    pointer-events: none;
-}
-
-.test_fila{
-    background-color: rebeccapurple;
-}
-
 .disabled {
     cursor: not-allowed;
     pointer-events: none;
@@ -86,7 +76,7 @@ main{
     height: auto;
 }
 
-.m-factura{
+/* .m-factura{
     min-width: 60%;
     height: auto;
     align-content: center;
@@ -96,12 +86,18 @@ main{
     min-width: 50%;
     height: auto;
     align-content: center;
+} */
+
+/*nuevo*/
+.mProductoOrden{
+    max-width: 50%;
+    height: auto;
 }
 
-.cardbodyfactura, .cardbodyfacturaleft{
+/* .cardbodyfactura, .cardbodyfacturaleft{
     border: solid 1px gainsboro;
     border-radius: 4px;
-}
+} */
 
 .m-producto{
     min-width: 98%;
@@ -173,7 +169,7 @@ main{
     padding: 0 ;
     padding-top: 2px !important;
     padding-left: 4px !important;
-    background-color: lightsteelblue !important;
+    background-color: lightsteelblue;
     color: black;
 }
 
@@ -232,7 +228,7 @@ main{
 
 .form-control{
     height: 22px;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .txtproductono{
@@ -248,7 +244,8 @@ main{
 }
 
 label{
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 
@@ -263,7 +260,7 @@ label{
     padding: 0;
 }
 /* prueba */
-.gridListaConceptoFactura, .container_ordenes, .container_oprocesadas, .contRemitters{
+/*.gridListaConceptoFactura,*/ .container_ordenes, .container_oprocesadas, .contRemitters{
     height: 280px;
     overflow: auto;
 }
@@ -272,37 +269,37 @@ label{
     overflow: auto;
 }
 
-.contordenes, .panelProducto, .panelNuevoProducto, .contEmbarques, .contRemDest, .contProducto, .contBuque, .containerPanelDoc{
-    height: 600px;
+.contordenes, .panelProducto, .contEmbarques, .contRemDest, .contProducto, .contBuque, .containerPanelDoc{
+    height: 650px;
     overflow: auto;
 }
 
-.contListadoEtiquetas, .contListadoFactura, .contListadoFacturaOrden{
+.contListadoEtiquetas /*.contListadoFactura, .contListadoFacturaOrden*/{
     height: 600px;
     overflow: auto;
 }
 
 .gridNProducto{
-    height: 280px;
+    height: 530px;
     overflow: auto;
 }
 
-.gridListadoProducto{
-    height: 410px;
+.gridListadoArticulo{
+    height: 250px;
     overflow: auto;
 }
 
-.tablelistadoordenes, .table_listadoproducto, .tablanewprod, .tablaListadoEtiquetas, .tablaListadoFactura, .tablaListadoFacturaOrden, .tablelistadoembarque, .tableTcRemDest, .tableItemProd, .tableTcBuque, .tablaTcCont, .tableTcCliente, .table_listaitemfactura, .tablaDoc, .tableRemitters{
+.tablelistadoordenes, .table_listadoproducto, .tablanewprod, .tablaListadoEtiquetas, /*.tablaListadoFactura, .tablaListadoFacturaOrden,*/ .tablelistadoembarque, .tableTcRemDest, .tableItemProd, .tableTcBuque, .tablaTcCont, .tableTcCliente, .table_listaitemfactura, .tablaDoc, .tableRemitters, .tablaListadoArticulo{
     width: 100%;
     overflow: auto;
 }
 
-.tablelistadoordenes, .table_listadoproducto, .tablanewprod, .tablaListadoEtiquetas, .tablaListadoFactura, .tablaListadoFacturaOrden, .tablelistadoembarque, .tableTcRemDest, .tableItemProd, .tableTcBuque, .tablaTcCont, .tableTcCliente, .table_listaitemfactura, .tablaDoc, .tableRemitters{
+.tablelistadoordenes, .table_listadoproducto, .tablanewprod, .tablaListadoEtiquetas, /*.tablaListadoFactura, .tablaListadoFacturaOrden,*/ .tablelistadoembarque, .tableTcRemDest, .tableItemProd, .tableTcBuque, .tablaTcCont, .tableTcCliente, .table_listaitemfactura, .tablaDoc, .tableRemitters, .tablaListadoArticulo{
     border-collapse: separate;
     border-spacing: 0;
 }
 
-.tablelistadoordenes thead, .table_listadoproducto thead, .tablanewprod thead, .tablaListadoEtiquetas thead, .tablaListadoFactura thead, .tablaListadoFacturaOrden thead, .tablelistadoembarque thead, .tableTcRemDest thead, .tableItemProd thead, .tableTcBuque thead, .tablaTcCont thead, .tableTcCliente thead, .table_listaitemfactura thead, .tablaDoc thead, .tableRemitters thead{
+.tablelistadoordenes thead, .table_listadoproducto thead, .tablanewprod thead, .tablaListadoEtiquetas thead, /*.tablaListadoFactura thead, .tablaListadoFacturaOrden thead,*/ .tablelistadoembarque thead, .tableTcRemDest thead, .tableItemProd thead, .tableTcBuque thead, .tablaTcCont thead, .tableTcCliente thead, .table_listaitemfactura thead, .tablaDoc thead, .tableRemitters thead, .tablaListadoArticulo thead{
     position: -webkit-sticky; /* Safari... */
     position: sticky;
     top: 0;
@@ -345,9 +342,9 @@ label{
 }
 
 .btnEditar{
-    background-color: white;
-    color: lightslategray;
-    border: 1px solid #d3d2d0;
+    background-color: white !important;
+    color: rgb(6, 104, 47) !important;
+    border: 1px solid #d3d2d0 !important;
     border-radius: 5px;
     font-size: 0.7875rem;
 }

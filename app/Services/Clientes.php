@@ -7,7 +7,7 @@
     {
         public function getClientes()
         {
-            $clientes = TcCliente::orderBy('nombre','ASC')->get();
+            $clientes = TcCliente::where('nombre','!=','SOCIEDAD COMERCIAL H.A.R. LIMITADA')->orderBy('nombre','ASC')->get();
             $clientesArray['']='';
             foreach($clientes as $cliente){
                 $clientesArray[$cliente->idcliente]=$cliente->nombre;

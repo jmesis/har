@@ -147,22 +147,6 @@ function showMessage(message,error,title,reload,window){
 
 
 
-// function showMessageDelete(message,title,opcion){
-//     if(opcion=="factura"){
-//         $("#modalDeleteFactura").modal("show");
-//         $("#msgtitledeletef").html(title);
-//         $("#msgerrordeletef").html(message);
-//         $("#modalDeleteFactura .modal-header").addClass("bg-danger");
-//     }
-//     else{
-//         $("#modalDelete").modal("show");
-//         $("#msgtitledelete").html(title);
-//         $("#msgerrordelete").html(message);
-//         $("#modalDelete .modal-header").addClass("bg-danger");
-//     }
-
-// }
-
 function showMessageDelete(message,title,opcion){
     if(opcion=="factura"){
         $("#modalDeleteFactura").modal("show");

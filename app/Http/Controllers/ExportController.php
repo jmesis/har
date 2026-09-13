@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AwbExcel;
 use App\Exports\MftoExport;
 use App\Exports\MftoExporta;
 use App\Exports\MftoExportf;
@@ -33,7 +34,7 @@ class ExportController extends Controller
 
     public function exporta($id){
         $emb=$id;
-        $File="mfto_".$emb;
+        /*$File="mfto_".$emb;*/
 
         $mfto=VtempMfto::where('embarque', '=', $emb)
             ->orderBy("operacion")
@@ -42,8 +43,15 @@ class ExportController extends Controller
         $cantbultos=VtempMfto::where('embarque', '=', $emb)
             ->sum('bultos');
 
-        $export = new MftoExporta($mfto,$cantbultos);
-        return Excel::download($export, $File.'.xlsx');
+        $canthouse=VtempMfto::where('embarque', '=', $emb)
+            ->count();
+
+        $totalpersonas=VtempMfto::distinct('destinatario')->where('embarque', '=', $emb)
+        ->count();
+
+        $file="mfto_".$mfto[0]['mawb'];
+        $export = new MftoExporta($mfto,$cantbultos,$canthouse,$totalpersonas);
+        return Excel::download($export, $file.'.xlsx');
     }
 
     public function exportFactura($embarque,$fechadesde,$fechahasta,$nfactura,$estado,$concepto){
@@ -83,22 +91,21 @@ class ExportController extends Controller
     }
 
     public function exportOrdenes($embarque,$master,$estadof,$estadoo){
-       
         $fecha = substr(Carbon::now(),0,10);
         $File="listadoordenes_".$fecha;
-        /*$nomaster="";
-        
+        $nomaster="";
+
         if($master == "SN"){
             $nomaster='';
         }
         else{
             $nomaster=$master;
-        }*/
-        
-        $rs = Vlistadoordene::where('embarque',$embarque)->doc($master)->estadof($estadof)->estadoo($estadoo)->get()->all();
-        $rsFacturada = Vlistadoordene::where('embarque',$embarque)->where('nofactura','!=',null)->doc($master)->estadof($estadof)->estadoo($estadoo)->count();
-        $rsPdtefactura = Vlistadoordene::where('embarque',$embarque)->where('nofactura','=',null)->doc($master)->estadof($estadof)->estadoo($estadoo)->count();
-        
+        }
+
+        $rs = Vlistadoordene::where('embarque',$embarque)->doc($nomaster)->estadof($estadof)->estadoo($estadoo)->get()->all();
+        $rsFacturada = Vlistadoordene::where('embarque',$embarque)->where('nofactura','!=',null)->doc($nomaster)->estadof($estadof)->estadoo($estadoo)->count();
+        $rsPdtefactura = Vlistadoordene::where('embarque',$embarque)->where('nofactura','=',null)->doc($nomaster)->estadof($estadof)->estadoo($estadoo)->count();
+
         $cantTotal=count($rs);
         $export = new OrdenExportExcel($rs,$rsFacturada,$rsPdtefactura,$embarque,$master,$estadof,$estadoo,$cantTotal);
         return Excel::download($export, $File.'.xlsx');

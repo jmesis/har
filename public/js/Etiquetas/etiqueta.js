@@ -6,69 +6,41 @@ $(document).ready(function(){
         }
     });
 
-    //genera cada etiqueta
     $(".table_listadoproducto tbody").on("click",".btn-etiqueta",function(){
 
         var row = $(this).parents('tr');
         var producto = (row.data("noproducto"));
-        var guiabl= (row.data("mguiabl"));
+        $("#modalLoading").modal({backdrop: 'static'});
 
-        if(guiabl != null){
-            $("#modalLoading").modal({backdrop: 'static'});
+        $.get("generatepdf",{param: producto}, function(response,param,status){
 
-            $.get("generatepdf",{param: producto}, function(response,param,status){
-
-                if(response){
-                    $("#modalLoading").modal("hide");
-                    $("#modalLoading").removeClass("fade");
-                    $("#modalLoading").removeClass("show");
-                    var url="../../pdf/"+response.data+".pdf";
-                    window.open(url, '_blank');
-                }
-            });
-        }
-        else{
-            var message="Falta el No. de embarque para poder generar las etiquetas";
-            var title="Atencion";
-            var error =true;
-            var win = 'error';
-            var reload=false;
-            showMessage(message,error,title,reload,win);
-        }
-
+            if(response){
+                $("#modalLoading").modal("hide");
+                $("#modalLoading").removeClass("fade");
+                $("#modalLoading").removeClass("show");
+                var url="pdf/"+response.data+".pdf";
+                window.open(url, '_blank');
+            }
+        });
     });
 
-    //genera las etiquetas resumen
     $(".tablelistadoordenes tbody").on("click",".btnEtiquetaResumen",function(){
 
         var row = $(this).parents('tr');
         var noorden = (row.data("noorden"));
-        var guiabl= (row.data("mguiabl"));
+        $("#modalLoading").modal({backdrop: 'static'});
 
-        if(guiabl != null){
-            $("#modalLoading").modal({backdrop: 'static'});
+        $.get("etiquetaResumen",{param: noorden}, function(response,param,status){
 
-            $.get("etiquetaResumen",{param: noorden}, function(response,param,status){
-
-                if(response){
-                    $("#modalLoading").modal("hide");
-                    $("#modalLoading").removeClass("fade");
-                    $("#modalLoading").removeClass("show");
-                    var url="../../pdf/"+response.data+".pdf";
-                    window.open(url, '_blank');
-                }
-            });
-        }
-        else{
-            var message="Falta el No. de embarque para poder generar las etiquetas";
-            var title="Atencion";
-            var error =true;
-            var win = 'error';
-            var reload=false;
-            showMessage(message,error,title,reload,win);
-        }
+            if(response){
+                $("#modalLoading").modal("hide");
+                $("#modalLoading").removeClass("fade");
+                $("#modalLoading").removeClass("show");
+                var url="pdf/"+response.data+".pdf";
+                window.open(url, '_blank');
+            }
+        });
     });
-
 
     //cierra panel busqueda etiqueta
     $(".btncerrar-listadoE").on("click", function(){

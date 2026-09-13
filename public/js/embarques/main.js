@@ -22,9 +22,7 @@ $(document).ready(function(){
 
         $("#txtorigen option:selected").text('');
         $("#txtorigen option:selected").val('');
-        $(".txtembarcador option:selected").text('');
         $(".txtconsignado option:selected").text('');
-        $(".txtembarcador option:selected").val('');
         $(".txtconsignado option:selected").val('');
         $(".txttipoemb option:selected").text('');
         $(".txttipoemb option:selected").val('');

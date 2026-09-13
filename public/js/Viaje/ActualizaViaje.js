@@ -75,10 +75,12 @@ $(document).ready(function(){
                     if(data.success=="true"){
                         $("#msgsession").attr("hidden");
                         var message=data.message;
-                        var title="Success!!!";
+                        var title="Informacion";
                         var error ='';
-                        var reload = true
-                        showMessage(message,error,title,reload);
+                        var reload = true;
+                        var win = "informacion";
+                        showMessage(message,error,title,reload,win);
+
                         $("#formViaje").trigger("reset");
                         $("#btnUpdateViaje").attr("hidden");
                         $("#btnSaveViaje").removeAttr("hidden");

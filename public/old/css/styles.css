@@ -1,0 +1,131 @@
+html, #app{
+    font-size: 13px;
+    background-color: #d8dde7;
+}
+
+main{
+    padding: 2px;
+}
+
+.error{
+    color: red;
+    font-size: 9;
+}
+
+.navbar{
+    padding: 0;
+}
+
+.navbar-brand{
+    font-size: 20px;
+}
+
+/*Color Letras Menu*/
+.navbar ul a,.navbar-brand{
+    color:white;
+}
+
+.embarque-principal, .embarque-detalle, .tablacontrol-tipocontenedor, .tablacontrol-buque{
+    /* border: solid 1px #03444a; */
+    width: 100%;
+    height: auto;
+    padding: 3px auto;
+
+
+}
+
+/*Tabla scroll*/
+/* .contordenes          { overflow: auto; height: 200px; width: 100%; } */
+/* .contordenes thead .thtop { position: sticky; top: 0; z-index: 1; } */
+/* .contordenes thead tr { position: sticky; top: 0; z-index: 1; } */
+/* .conttableordenes tbody th { position: sticky; left: 0; } */
+
+/* Just common table stuff. Really. */
+/*table  { width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }*/
+/*-------*/
+
+.div-mbody{
+    background-color: white;
+    border: solid 0 grey;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px grey;
+    padding: 5px;
+    height: 600px;
+    margin: 5px auto;  
+}
+
+.div-mbody-detalle{
+    background-color: white;
+    border: solid 0 grey;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px grey;
+    height: 600px;
+    margin: 5px auto;
+}
+
+.div-mtop, .div-mdetalle{
+    margin-bottom: 2px;
+}
+
+.m-embarque, .mRemDest{
+    max-width: 70%;
+    height: auto;
+}
+
+.m-orden{
+    max-width: 40%;
+    height: auto;
+}
+
+.m-producto{
+    min-width: 98%;
+    height: auto;
+    align-content: center;
+}
+
+.contenedor-mproducto, .contenedor-morden, .contenedor-membarque{
+    background-color:  white;
+}
+
+.card-footer{
+    background-color: white;
+    border: none;
+}
+
+.lblnoembarque-detalle, .lblnoorden-detalle{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.formfieldproducto{
+    border: solid 1px lightseagreen;
+    border-radius: 4px;
+}
+
+.navbar-toggler-icon{
+    color: white;
+    background: white;
+}
+
+/* #txtnoembarque_orden, #txtembarque_ordenmodal, #txtnoembarque_prod, #txtnoorden_prod, #txtdest_prod{
+    background-color: wheat;
+    font-weight: bold;
+    width: 50%;
+} */
+
+#div-reminput{
+    padding: 4px;
+    border: solid 1 grey;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.leyendaproducto{
+    background-color: lightgray;
+    border: solid 0 grey;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px grey;
+    margin: 5px auto;
+}

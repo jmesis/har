@@ -63,7 +63,8 @@ class OrdenController extends Controller
             'remitente'=>'required',
             'destinatario'=>'required',
             'iddestinatario'=>'required',
-            'fentrada' => 'required'
+            'fentrada' => 'required',
+            'entrega' => 'required'
         ]);
 
         // if($fields['tipoenvio'] == 'ENA' || $fields['tipoenvio'] == 'MNJ'){
@@ -95,17 +96,16 @@ class OrdenController extends Controller
             DB::beginTransaction();
             try{
                 $consecutivo = str_pad($resultado, 4, '0', STR_PAD_LEFT);
-
                 $orden=Ordene::create([
                     'idremitter'=>$request['idremitter'],
                     'idremdest'=>$fields['iddestinatario'],
                     'idembarque'=>$idembarque['idembarque'],
                     'idtenvio' =>$tipoenvio['idtenvio'],
+                    'identrega'=>$fields['entrega'],
                     'codigoenvio' => substr($tipoenvio['categoria'],0,3),
                     'no_orden'=>substr($tipoenvio['categoria'],0,3).$year.$consecutivo,
                     'noseq'=>$resultado,
                     'anno'=>$year,
-                    // 'remitente'=>strtoupper("".$nom_remitente.""),
                     'remitente'=>strtoupper("".$fields['remitente'].""),
                     'fentrada' =>$request['fentrada'],
                     'estado' => 'PENDIENTE'
@@ -199,8 +199,6 @@ class OrdenController extends Controller
                 ]);
             }
             else{
-                Cargo::where('idorden',$orden[0]['idorden'])->delete();
-                FacturaDato::where('idorden',$orden[0]['idorden'])->delete();
                 Etiqueta::where('idorden',$orden[0]['idorden'])->delete();
                 Producto::where('idorden',$orden[0]['idorden'])->delete();
                 Ordene::where('idorden',$orden[0]['idorden'])->delete();
@@ -302,21 +300,26 @@ class OrdenController extends Controller
 
     public function moveRequest(Request $request){
 
+        global $operacion;
+
         DB::beginTransaction();
         try{
             if ($request->isMethod('post')){
-                $lastEmb = Embarque::where('no_embarque',$request->beforeEmbarque)->get('idembarque');
-                $newEmb = Embarque::where('no_embarque',$request->afterEmbarque)->get('idembarque');
 
-                $operacion = Ordene::where('idembarque',$lastEmb[0]['idembarque'])->where('estado','PENDIENTE')->update([
-                    'idembarque'=> $newEmb[0]['idembarque']
-                ]);
+                foreach($request->datos as $dato){
 
-                if($operacion){
+                    $lastEmb = Embarque::where('no_embarque',$request->beforeEmbarque)->get('idembarque');
+                    $newEmb = Embarque::where('no_embarque',$request->afterEmbarque)->get('idembarque');
+                    $operacion = Ordene::where('idembarque',$lastEmb[0]['idembarque'])->where('no_orden',$dato['noorden'])->update([
+                        'idembarque'=> $newEmb[0]['idembarque']
+                    ]);
+                }
+                //  dd($operacion);
+                if($operacion == 1){
                     DB::commit();
                     return response()->json([
                         'success' => 'true',
-                        'message'=>'Las solicitudes pendientes han sido trasladadas a otro embarque'
+                        'message'=>'Las solicitudes seleccionadas han sido trasladadas a otro embarque',
                     ]);
                 }
                 else{

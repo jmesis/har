@@ -107,9 +107,7 @@
                 <table style="height: 60px">
                     <tbody>
                         <tr>
-                            {{-- <td class="titulo-cabecera"> <img src="{{ asset('images/harlogo.png')}}"></td> --}}
-                            <div class="titulo-cabecera"> <img src="{{ asset('images/kharlogo.png')}}"></div>
-                            {{-- <td class="titulo-cabecera"> <span>COMERCIAL HAR LIMITED</span></td> --}}
+                            <div class="titulo-cabecera"><img src="images/kharlogo.png"></div>
                         </tr>
                     </tbody>
                 </table>

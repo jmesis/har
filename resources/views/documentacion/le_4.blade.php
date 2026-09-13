@@ -182,9 +182,9 @@ tbody {
 </head>
 
 <body>
-
+   
     <div class="pageprint">
-
+       
         <table>
             <tr>
                  <td class="td3" colspan="3">
@@ -416,7 +416,7 @@ tbody {
             <tr>
                 <td class="td1" colspan="5">
                     <!-- tabla de la parte de descripcion de articulos  -->
-
+                     
                       <table style="border-collapse:collapse;margin-left:5.75pt; width: 100%;" cellspacing="0">
                         <tr style="height:30pt">
                             <td
@@ -476,12 +476,12 @@ tbody {
                             </td>
                         </tr>
                         @endforeach
-                        @endforeach
-                    </table>
-
+                        @endforeach  
+                    </table>  
+                    
                 </td>
             </tr>
-            <tr style="border: #000080 1px">
+            <tr>
                 <td class="td1"></td>
                 <td class="td2"></td>
                 <td class="td3"></td>
@@ -489,9 +489,9 @@ tbody {
                 <td class="td5"></td>
             </tr>
         </table>
-
+        
     </div>
-
+    
 </body>
 
 </html>

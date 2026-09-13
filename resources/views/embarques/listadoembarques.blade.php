@@ -60,8 +60,8 @@
                             <td class="rowtdembarque @if($vembarqueitem->estado =="EN PROCESO") trpdte @elseif($vembarqueitem->estado =="READY") trready @else trconfirm @endif">{{ $vembarqueitem->estado }}</td>
                             <td class="rowtdembarque" style="text-align: center">
                                 {{--<button class="btn btn-sm btnEditar btnEditarBuque" @if($vembarqueitem->estado =="CONFIRMADO") disabled @endif><i class="far fa-edit"></i><span class="ml-1">{{ __('Editar')}}</span></button>--}} 
-                                 <button class="btn btn-sm mr-auto btn-editarembarque btnEditar" @if($vembarqueitem->estado =="CONFIRMADO") disabled @endif><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn btn-sm btn-danger mr-auto btn-cancelarembarque btnEliminar" @if($vembarqueitem->estado =="CONFIRMADO") disabled @endif><i class="fa-solid fa-trash"></i></button>
+                                 <button class="btn btn-sm mr-auto btn-editarembarque btnEditar" @if($vembarqueitem->estado =="CONFIRMADO") disabled @endif><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger mr-auto btn-cancelarembarque btnEliminar" @if($vembarqueitem->estado =="CONFIRMADO") disabled @endif><i class="fas fa-trash-alt"></i></button>
                             </td>
                             <td class="rowtdembarque" hidden>{{ $vembarqueitem->codigoorigen }}</td>
                             <td class="rowtdembarque" hidden>{{ $vembarqueitem->codigoembarque }}</td>

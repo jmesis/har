@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $idremdest
  * @property int $idembarque
  * @property int $idtenvio
+ * @property int|null $identrega
  * @property string $codigoenvio
  * @property string $no_orden
  * @property string $noseq
@@ -28,8 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $estado
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * 
  * @property Embarque $embarque
+ * @property TcEntrega|null $tc_entrega
  * @property TcRemDest $tc_rem_dest
  * @property TcRemitter|null $tc_remitter
  * @property TcTipoenvio $tc_tipoenvio
@@ -49,7 +50,8 @@ class Ordene extends Model
 		'idremitter' => 'int',
 		'idremdest' => 'int',
 		'idembarque' => 'int',
-		'idtenvio' => 'int'
+		'idtenvio' => 'int',
+		'identrega' => 'int'
 	];
 
 	protected $dates = [
@@ -61,6 +63,7 @@ class Ordene extends Model
 		'idremdest',
 		'idembarque',
 		'idtenvio',
+		'identrega',
 		'codigoenvio',
 		'no_orden',
 		'noseq',
@@ -74,6 +77,11 @@ class Ordene extends Model
 	public function embarque()
 	{
 		return $this->belongsTo(Embarque::class, 'idembarque');
+	}
+
+	public function tc_entrega()
+	{
+		return $this->belongsTo(TcEntrega::class, 'identrega');
 	}
 
 	public function tc_rem_dest()

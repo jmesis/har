@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $estado
  * @property int|null $idnaviera
  * @property string|null $naviera
+ * @property int $anno
  *
  * @package App\Models
  */
@@ -44,7 +45,8 @@ class Vembarque extends Model
 	protected $casts = [
 		'idpol' => 'int',
 		'idpod' => 'int',
-		'idnaviera' => 'int'
+		'idnaviera' => 'int',
+		'anno' => 'int'
 	];
 
 	protected $dates = [
@@ -71,6 +73,7 @@ class Vembarque extends Model
 		'fecha_est',
 		'estado',
 		'idnaviera',
-		'naviera'
+		'naviera',
+		'anno'
 	];
 }

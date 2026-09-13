@@ -49,19 +49,19 @@ $(document).ready(function(){
             }
 
             var idembarque = $("#txtembarque").val();
-            var origen = $("#txtorigen option:selected").text();
-            var embarcador = $("#txtembarcador option:selected").text();
-            var consignado = $("#txtconsignado option:selected").text();
-            var tipoemb = $("#txttipoemb option:selected").text();
-            var buque = $("#txtbuque option:selected").text();
-            var viaje = $("#txtviaje option:selected").text();
+            var origen = $.trim($("#txtorigen option:selected").text());
+            var embarcador = $("#txtembarcador").val();
+            var consignado = $.trim($("#txtconsignado option:selected").text());
+            var tipoemb = $.trim($("#txttipoemb option:selected").text());
+            var buque = $.trim($("#txtbuque option:selected").text());
+            var viaje = $.trim($("#txtviaje option:selected").text());
             var fechaest = $("#txtfechaest").val();
             var idpol = $("#idtxtpol").val();
             var idpod = $("#idtxtpod").val();
             cont = $("#txtcont").val();
-            var tipocont = $("#txttipocont option:selected").text();
+            var tipocont = $.trim($("#txttipocont option:selected").text());
             var mfto = $("#txtmfto").val();
-            var idnaviera = $("#txtnaviera option:selected").val();
+            var idnaviera = $.trim($("#txtnaviera option:selected").val());
             var nodoc = $(".txtdocembarque").val();
 
             var action = $("#urlembarqueupdate").attr("href");

@@ -4,7 +4,7 @@ $(document).ready(function(){
     var noproducto = $("#txtproductono");
     var noorden = $("#txtnoorden_prod_nuevo");
 
-    var producto = $("#txtproducto option:selected");
+    var producto = $("#txtproducto");
     var articulo = $("#txtarticulo");
     var categoria = $("#txtcategoria");
     var um = $("#txtumedida");
@@ -21,6 +21,31 @@ $(document).ready(function(){
     $('.btnAddItemProd').on('click', function(){
         $("#mItemProd").modal({backdrop: 'static'});
     })
+
+    //ABRE MODAL, DONDE SE AGREGA EL NUEVO PRODUCTO PARA EL BULTO
+    $("#btnNuevoProd").on("click", function(){
+        $("#mProductoOrden").modal({backdrop:'static'});
+
+        //LLAMA A ESTA FUNCION QUE OBTIENE TODOS LOS PRODUCTOS Y LOS MUESTRA EN EL GRID PARA QUE EL CLIENTE SELECCIONE CUALES AGREGAR
+        obtenerArticulosOrden();
+    });
+
+    //CIERRA MODAL DONDE SE AGREGA EL NUEVO PRODUCTO PARA EL BULTO
+    $("#btnCloseNuevoArticulo").on("click", function(){
+        $("#mProductoOrden").modal('hide');
+        producto.val('');
+        articulo.val('');
+        categoria.val('');
+        um.val('');
+        cantidad.val(0);
+        mcubico.val(0);
+        alto.val(0);
+        largo.val(0);
+        ancho.val(0);
+        vaduana.val(0);
+        pesokg.val(0);
+        pvolumen.val(0);
+    });
 
     //Cierra Modal Productos
     $('.btnCloseItemProd').on('click', function(){
@@ -88,10 +113,8 @@ $(document).ready(function(){
 
         $.get("noproducto",{param:"1"}, function(response){
             $("#txtproductono").val(response);
-        })
-
-
-    })
+        });
+    });
 
     //Cierra nuevo producto
     $(".btncerrar-nuevoproducto").on("click", function(){
@@ -145,111 +168,131 @@ $(document).ready(function(){
         }
     });
 
+    //busca registros en la tabla articulos de productos
+    $("#findTablaArticulo").on("keyup", function() {
+        var tabla = $(".tablaListadoArticuloBody tr");
+        var query = $("#findTablaArticulo").val();
+        buscarEnTabla(query,tabla);
+    });
+
     //Selecciona datos segun Producto
-    $("#txtproducto").on("change", function(){
-        var idproducto = $(this).val();
-        var orden = $("#txtnoorden_prod_nuevo").val();
+    // $("#txtproducto").on("change", function(){
+    //     var idproducto = $(this).val();
+    //     var orden = $("#txtnoorden_prod_nuevo").val();
+    //Abre nuevo producto pero ya con los detalles de la tabla
+    $(".tablaListadoArticulo tbody").on("dblclick",".rowtdarticulos", function(){
 
-        $.ajax({
-            type:'POST',
-            url:'articuloscapitulo',
-            data:{
-                idproducto:idproducto,
-                orden:orden
-            },
-            success:function(obj, status, error){
+        var row = $(this).parents('tr');
+        var idarticulo = (row.data("idarticulo"));
+        var articulo = (row.data("articulo"));
+        var capitulo = (row.data("capitulo"));
+        var producto = (row.data("producto"));
+        var um = (row.data("um"));
+        var valor = (row.data("valor"));
 
-                    var jsonResults = JSON.parse(obj);
-                    $.each(jsonResults.data, function( index, obj ) {
+        if(producto=="BULTO 1.5KG"){
+            $("#txtcantidad").val(0);
 
-                        if(obj.producto=="BULTO 1.5KG"){
-                            $("#txtcantidad").val(0);
+            $("#txtaltom3").val("50");
+            $("#txtlargom3").val("100");
+            $("#txtanchom3").val("40");
+            $("#txtmcubico").val("0.2");
+            $("#txtpesokg").val("0");
+            $("#txtmcubicokg").val("0");
+            $(".txtm3").attr("disabled",true);
+            $("#txtpesokg").attr("disabled",true);
+            $("#btnCalculaM3").attr("disabled",true);
+        }
+        else if(producto=="BULTO 3KG"){
+            $("#txtcantidad").val(0);
 
-                            $("#txtaltom3").val("50");
-                            $("#txtlargom3").val("100");
-                            $("#txtanchom3").val("40");
-                            $("#txtmcubico").val("0.2");
-                            $("#txtpesokg").val("0");
-                            $("#txtmcubicokg").val("0");
-                            $(".txtm3").attr("disabled",true);
-                            $("#txtpesokg").attr("disabled",true);
-                            $("#btnCalculaM3").attr("disabled",true);
-                        }
-                        else if(obj.producto=="BULTO 3KG"){
-                            $("#txtcantidad").val(0);
+            $("#txtaltom3").val("100");
+            $("#txtlargom3").val("200");
+            $("#txtanchom3").val("80");
+            $("#txtmcubico").val("0.5");
+            $("#txtpesokg").val("0");
+            $("#txtmcubicokg").val("0");
+            $(".txtm3").attr("disabled",true);
+            $("#txtpesokg").attr("disabled",true);
+            $("#btnCalculaM3").attr("disabled",true);
+        }
+        else if(producto=="BULTO 5KG"){
+            $("#txtcantidad").val(0);
 
-                            $("#txtaltom3").val("100");
-                            $("#txtlargom3").val("200");
-                            $("#txtanchom3").val("80");
-                            $("#txtmcubico").val("0.5");
-                            $("#txtpesokg").val("0");
-                            $("#txtmcubicokg").val("0");
-                            $(".txtm3").attr("disabled",true);
-                            $("#txtpesokg").attr("disabled",true);
-                            $("#btnCalculaM3").attr("disabled",true);
-                        }
-                        else if(obj.producto=="BULTO 5KG"){
-                            $("#txtcantidad").val(0);
+            $("#txtaltom3").val("200");
+            $("#txtlargom3").val("300");
+            $("#txtanchom3").val("100");
+            $("#txtmcubico").val("0.8");
+            $("#txtpesokg").val("0");
+            $("#txtmcubicokg").val("0");
+            $(".txtm3").attr("disabled",true);
+            $("#txtpesokg").attr("disabled",true);
+            $("#btnCalculaM3").attr("disabled",true);
+        }
+        else if(producto=="BULTO 10KG"){
+            $("#txtcantidad").val(0);
 
-                            $("#txtaltom3").val("200");
-                            $("#txtlargom3").val("300");
-                            $("#txtanchom3").val("100");
-                            $("#txtmcubico").val("0.8");
-                            $("#txtpesokg").val("0");
-                            $("#txtmcubicokg").val("0");
-                            $(".txtm3").attr("disabled",true);
-                            $("#txtpesokg").attr("disabled",true);
-                            $("#btnCalculaM3").attr("disabled",true);
-                        }
-                        else if(obj.producto=="BULTO 10KG"){
-                            $("#txtcantidad").val(0);
+            $("#txtaltom3").val("200");
+            $("#txtlargom3").val("300");
+            $("#txtanchom3").val("100");
+            $("#txtmcubico").val("0.9");
+            $("#txtpesokg").val("0");
+            $("#txtmcubicokg").val("0");
+            $(".txtm3").attr("disabled",true);
+            $("#txtpesokg").attr("disabled",true);
+            $("#btnCalculaM3").attr("disabled",true);
+        }
+        else if(producto=="BULTO 20KG"){
+            $("#txtcantidad").val(0);
 
-                            $("#txtaltom3").val("200");
-                            $("#txtlargom3").val("300");
-                            $("#txtanchom3").val("100");
-                            $("#txtmcubico").val("0.9");
-                            $("#txtpesokg").val("0");
-                            $("#txtmcubicokg").val("0");
-                            $(".txtm3").attr("disabled",true);
-                            $("#txtpesokg").attr("disabled",true);
-                            $("#btnCalculaM3").attr("disabled",true);
-                        }
-                        else if(obj.producto=="BULTO 20KG"){
-                            $("#txtcantidad").val(0);
+            $("#txtaltom3").val("200");
+            $("#txtlargom3").val("300");
+            $("#txtanchom3").val("100");
+            $("#txtmcubico").val("1.0");
+            $("#txtpesokg").val("0");
+            $("#txtmcubicokg").val("0");
+            $(".txtm3").attr("disabled",true);
+            $("#txtpesokg").attr("disabled",true);
+            $("#btnCalculaM3").attr("disabled",true);
+        }
+        else{
+            $("#txtpesokg").val("");
+            $(".txtm3").removeAttr("disabled");
+            $("#txtpesokg").removeAttr("disabled");
+            $("#btnCalculaM3").attr("disabled",false);
+            $("#txtaltom3").val("");
+            $("#txtlargom3").val("");
+            $("#txtanchom3").val("");
+            $("#txtmcubico").val("");
+        }
+        $("#txtproducto").val(producto);
+        $("#txtcategoria").val(capitulo);
+        $("#txtarticulo").val(articulo);
+        $("#txtumedida").val(um);
+        $("#txtvaduana").val(valor);
 
-                            $("#txtaltom3").val("200");
-                            $("#txtlargom3").val("300");
-                            $("#txtanchom3").val("100");
-                            $("#txtmcubico").val("1.0");
-                            $("#txtpesokg").val("0");
-                            $("#txtmcubicokg").val("0");
-                            $(".txtm3").attr("disabled",true);
-                            $("#txtpesokg").attr("disabled",true);
-                            $("#btnCalculaM3").attr("disabled",true);
-                        }
-                        else{
-                            $("#txtpesokg").val("");
-                            $(".txtm3").removeAttr("disabled");
-                            $("#txtpesokg").removeAttr("disabled");
-                            $("#btnCalculaM3").attr("disabled",false);
-                            $("#txtaltom3").val("");
-                            $("#txtlargom3").val("");
-                            $("#txtanchom3").val("");
-                            $("#txtmcubico").val("");
-                        }
-                        $("#txtcategoria").val(obj.capitulo);
-                        $("#txtarticulo").val(obj.articulo);
-                        $("#txtumedida").val(obj.um);
-                        $("#txtvaduana").val(obj.valor);
-                    });
-                // }
-            },
-            error:function(obj){
-                var sms = obj.message;
-                $(".msgsession").removeAttr("hidden");
-                $(".msg").html(sms).fadeOut( 1000 );
-            }
-        });
+        // $.ajax({
+        //     type:'POST',
+        //     url:'articuloscapitulo',
+        //     data:{
+        //         idproducto:idproducto,
+        //         orden:orden
+        //     },
+        //     success:function(obj, status, error){
+
+        //             var jsonResults = JSON.parse(obj);
+        //             $.each(jsonResults.data, function( index, obj ) {
+
+
+        //             });
+        //         // }
+        //     },
+        //     error:function(obj){
+        //         var sms = obj.message;
+        //         $(".msgsession").removeAttr("hidden");
+        //         $(".msg").html(sms).fadeOut( 1000 );
+        //     }
+        // });
     });
 
     //Calcula M3 y KG
@@ -315,8 +358,12 @@ $(document).ready(function(){
     $(".tablanewprod tbody").on("click",".btn-editprod", function(e){
         e.preventDefault();
 
+        $("#mProductoOrden").modal({backdrop:'static'});
         $("#btn-saveProducto").attr("hidden",true);
         $("#btn-updateProducto").removeAttr("hidden");
+
+        //LLAMA A ESTA FUNCION QUE OBTIENE TODOS LOS PRODUCTOS Y LOS MUESTRA EN EL GRID PARA QUE EL CLIENTE SELECCIONE CUALES AGREGAR
+        obtenerArticulosOrden();
 
         var row = $(this).parents('tr');
 
@@ -336,7 +383,6 @@ $(document).ready(function(){
         var ows = (row.data("ow"));
 
         producto.val(productoField);
-        producto.text(productoField);
         articulo.val(articuloField);
         categoria.val(categoriaField);
         um.val(umField);
@@ -383,5 +429,33 @@ function agregarFilaProdudcto(noproducto, descripcion, capitulo, articulo, um, c
            '</tr>';
     $('.tablanewprod tbody').append(htmlTags);
     $("#valorresto").val();
+}
+
+function agregarFilaArticulos(idarticulo, capitulo, articulo, producto, um, valor) {
+
+    var htmlTags = '<tr idarticulo="'+idarticulo+'" data-capitulo="'+capitulo+'"data-articulo="'+articulo+'" data-producto="'+producto+'" data-um="'+um+'" data-valor="'+valor+'">'+
+        '<td class="rowtdarticulos" hidden>'+idarticulo+'</td>'+
+        '<td class="rowtdarticulos">'+producto+'</td>'+
+        '<td class="rowtdarticulos">'+articulo+'</td>'+
+        '<td class="rowtdarticulos">'+capitulo+'</td>'+
+        '<td class="rowtdarticulos">'+um+'</td>'+
+        '<td class="rowtdarticulos">'+valor+'</td>'+
+        '</tr>';
+    $('.tablaListadoArticulo tbody').append(htmlTags);
+}
+
+
+function obtenerArticulosOrden(){
+    $.ajax({
+        type: "POST",
+        url: "listaArticulos",
+        success:function(response){
+            $(".tablaListadoArticuloBody tr").remove();
+            var jsonResults = JSON.parse(response);
+            $.each(jsonResults.data, function( index, response ){
+                agregarFilaArticulos(response.idarticulo,response.capitulo,response.articulo,response.producto,response.um,response.valor);
+            });
+        }
+    });
 }
 

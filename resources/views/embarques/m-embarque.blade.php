@@ -27,8 +27,8 @@
                             </div>
                             <div class="card-body">
                                 <div id="fielddg" class="form-row pt-2">
-                                    {{-- <div class="form-group col-sm-4">
-                                        <label for="lblorigen">{{ __("Pais de Solicitud") }}</label>
+                                    <div class="form-group col-sm-4">
+                                        <label for="lblorigen">{{ __("Oficina") }}</label>
                                         <select id="txtorigen"
                                                 name="txtorigen"
                                                 class="selectpicker show-menu-arrow form-control form-control-sm txtorigen requerido"
@@ -38,12 +38,11 @@
                                                 <option data-tokens="{{ $origen }}" value="{{ $origen }}"> {{ $origen }}</option>
                                             @endforeach
                                         </select>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="form-group col-sm-4">
-                                        <label for="lblembarcador">{{ __("Embarcador") }}</label>
-                                        <input id="txtembarcador" class="form-control form-control-sm txtembarcador" type="text" name="txtembarcador" value="SOCIEDAD COMERCIAL HAR LIMITADA" disabled>
-                                        {{-- <select id="txtembarcador"
+                                        {{-- <label for="lblembarcador">{{ __("Embarcador") }}</label>
+                                        <select id="txtembarcador"
                                                 name="txtembarcador"
                                                 class="selectpicker show-menu-arrow form-control form-control-sm txtembarcador requerido"
                                                 data-live-search="true"
@@ -52,6 +51,9 @@
                                                 <option data-tokens="{{ $nombre }}" value="{{ $nombre }}"> {{ $nombre }}</option>
                                             @endforeach
                                         </select> --}}
+
+                                        <label for="lblembarcador">{{ __("Embarcador") }}</label>
+                                        <input id="txtembarcador" class="form-control form-control-sm txtembarcador" type="text" name="txtembarcador" value="SOCIEDAD COMERCIAL H.A.R. LIMITADA" disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="lblconsignado">{{ __("Consignado") }}</label>

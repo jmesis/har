@@ -94,7 +94,7 @@ $(document).ready(function(){
             var noproducto = $("#txtproductono").val();
             var noorden = $("#txtnoorden_prod_nuevo").val();
 
-            var producto =  $.trim($("#txtproducto option:selected").text());
+            var producto =  $("#txtproducto").val();
             var articulo = $("#txtarticulo").val();
             var categoria = $("#txtcategoria").val();
             var um = $("#txtumedida").val();
@@ -155,9 +155,7 @@ $(document).ready(function(){
                 success:function(data){
 
                     if(data.success=="true"){
-                        $("#txtproducto").prop('selectedIndex',0);
-                        $("#txtproducto option:selected").text('');
-                        $("#txtproducto option:selected").val('');
+                        $("#txtproducto").val('');
                         $("#txtarticulo").val('');
                         $("#txtcategoria").val('');
                         $("#txtumedida").val('');

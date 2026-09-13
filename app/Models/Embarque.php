@@ -78,6 +78,7 @@ class Embarque extends Model
 		'nomfto',
 		'mguia_bl',
 		'no_embarque',
+		'origen',
 		'tipoembarque',
 		'anno',
 		'noseq',

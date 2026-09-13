@@ -16,6 +16,7 @@ $(document).ready(function(){
     var provincia;
     var municipio;
     var cp;
+    var email;
 
 
     //Carga los datos de una tabla en formulario
@@ -36,7 +37,8 @@ $(document).ready(function(){
         telefono=row.data('telefono');
         provincia=row.data('provincia');
         municipio=row.data('municipio');
-        cp=row.data('cp')
+        cp=row.data('cp');
+        email=row.data('email')
 
         e.preventDefault();
 
@@ -51,6 +53,7 @@ $(document).ready(function(){
         $("#txtnocalle").val(no_calle);
         $("#txtapto").val(apto);
         $("#txtentrecalle").val(entrecalle);
+        $("#txtemail_remdest").val(email);
         $("#txtprov option:selected").text(provincia);
         $("#txtprov option:selected").val(provincia);
         $("#txtmcpio").append("<option value="+municipio+">"+municipio+"</option>");
@@ -97,7 +100,11 @@ $(document).ready(function(){
                 txtentrecalle:"required",
                 txtprov:"required",
                 txtmcpio:"required",
-                txtcp:"required"
+                txtcp:"required",
+                txtemail_remdest:{
+                    required:true,
+                    email:true
+                }
             },
             messages:{
                 txtci:{
@@ -118,7 +125,11 @@ $(document).ready(function(){
                 txtentrecalle:"Este campo es obligatorio",
                 txtprov:"Este campo es obligatorio",
                 txtmcpio:"Este campo es obligatorio",
-                txtcp:"Este campo es obligatorio"
+                txtcp:"Este campo es obligatorio",
+                txtemail_remdest:{
+                    required:"Este campo es obligatorio",
+                    email:"Este campo solo permite email valido"
+                }
             }
         })
 
@@ -139,6 +150,7 @@ $(document).ready(function(){
             var provincia = $("#txtprov option:selected").text();
             var municipio = $("#txtmcpio option:selected").text();
             var cp = $("#txtcp option:selected").val();
+            var email = $("#txtemail_remdest").val();
 
             var action = $("#urlremdestupdate").attr("href");
             var method = 'PATCH';
@@ -162,7 +174,8 @@ $(document).ready(function(){
                     entrecalle:entrecalle,
                     provincia:provincia,
                     municipio:municipio,
-                    cp:cp
+                    cp:cp,
+                    email:email
                 },
                 success:function(data){
                     if(data.success=="true"){

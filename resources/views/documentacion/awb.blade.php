@@ -440,7 +440,7 @@
 			<td style="border-left: 1px solid #000000" colspan=9 align="center" bgcolor="#FFFFFF"><br></td>
 			<td colspan=2 align="right" bgcolor="#FFFFFF"><b>{{$awb->mawb}}</b></td>
 			</tr>
-
+	
 	</table>
 </td></tr>
 </table>

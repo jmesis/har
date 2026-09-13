@@ -84,7 +84,8 @@ class TcRemDestController extends Controller
                 'calle'=>strtoupper($fields['calle']),
                 'no_calle'=>$fields['no_calle'],
                 'entrecalle'=>strtoupper($fields['entrecalle']),
-                'apto'=>$apto
+                'apto'=>$apto,
+                'email' => strtoupper($request['email']),
             ]);
 
             if($tcremdest){
@@ -180,7 +181,8 @@ class TcRemDestController extends Controller
                 'calle'=>strtoupper($fields['calle']),
                 'no_calle'=>strtoupper($fields['no_calle']),
                 'entrecalle'=>strtoupper($fields['entrecalle']),
-                'apto'=>$apto
+                'apto'=>$apto,
+                'email' => strtoupper($request['email'])
             ]);
 
             if($tcremdest){

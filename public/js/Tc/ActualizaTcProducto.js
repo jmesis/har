@@ -87,6 +87,7 @@ $(document).ready(function(){
                             var reload = true;
                             var window="informacion";
                             showMessage(message,error,title,reload,window);
+                            
                             $(".formmItemProd").trigger("reset");
                             $("#mItemProd").modal('hide');
                             $("#title-mitemprod").html("Nuevo Producto");
